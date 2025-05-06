@@ -35,4 +35,6 @@ console.log(`El texto tiene ${resultadoTexto} letras`)
 
 // 4. Crea una función que reciba un nombre y lo devuelva en mayúsculas.
 
+
+
 // 5. Crea una función que reciba el año de nacimiento y devuelva la edad.
