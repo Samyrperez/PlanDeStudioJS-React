@@ -69,17 +69,91 @@ do {
 // 7. Crea una función que reciba un array de nombres y devuelva uno nuevo con solo los que empiezan con “M”.
 // Integra: funciones + bucles + condicionales + arrays.
 
-let nombres = ["Mono","Malejo", "Pedro", "Alberto", "María", "Antonio", "Luis"];
+// let nombres = ["Mono","Malejo", "Pedro", "Alberto", "María", "Antonio", "Luis"];
 
-let nombresConM = [];
+// let nombresConM = [];
 
-function filtrarNombresConM(nombres) {
-    for (let i = 0; i < nombres.length; i++) {
-        if (nombres[i][0] === "M") {
-            nombresConM.push(nombres[i]);
+// function filtrarNombresConM(nombres) {
+//     for (let i = 0; i < nombres.length; i++) {
+//         if (nombres[i][0] === "M") {
+//             nombresConM.push(nombres[i]);
+//         } 
+//     }
+//     return nombresConM;
+// }
+// let resultado = filtrarNombresConM(nombres);
+// console.log(resultado);
+
+
+// 💡 Desafíos de repaso (opcional)
+// 1. Contador de vocales
+// Crea una función que reciba un texto y cuente cuántas vocales tiene.
+
+// let texto = prompt("Introduce un texto: ");
+
+// function contarVocales(texto) {
+//     let contador = 0;
+//     let textoMin = texto.toLowerCase(); //Convierte todo el texto a minúsculas.
+
+//     for (let i = 0; i < textoMin.length; i++) {
+//         let letra = textoMin[i];
+//         if ("aeiou".includes(letra)) {
+//             contador++;
+//         }
+//     }
+//     return contador;
+// }
+// let resultado = contarVocales(texto);
+// console.log((`Él texto tiene ${resultado} vocales.`));
+
+
+
+// 2. Buscador en array
+// Crea una función que reciba un nombre y un array, y diga si ese nombre está dentro del array (sin importar mayúsculas/minúsculas).
+// let nombre = prompt("Introduce un nombre: ");
+// let nombresArray = ["Samyr", "Andres", "Jorge", "Mario",];
+
+
+// function buscarNombre(nombre, array) {
+//     let nombreBuscado = nombre.toLowerCase();
+//     for (let i = 0; i < array.length; i++) {
+//         if (array[i].toLowerCase() === nombreBuscado) {
+//             console.log("El nombre se encuentra en el array. ");
+//             return; 
+//         } else {
+//             console.log("El nombre no se encuentra en el array.");
+//         }
+//     }
+// }
+
+// buscarNombre(nombre, nombresArray);
+
+
+// 3. Nombres duplicados
+// Crea una función que reciba un array y devuelva uno nuevo con los nombres que aparecen más de una vez.
+
+let nombresArray = ["Samyr", "Samyr", "Andres", "Jorge", "Mario",];
+let nombre = prompt("Introduce un nombre: ")
+
+function buscarNombreDuplicado(nombre, array) {
+    let nombreDuplicado = [];
+    let contador = 0;
+    
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === nombre) {
+            nombreDuplicado.push(array[i]);
+            contador++;
+            
         } 
+    } 
+
+    if(contador > 1) {
+        console.log(`El nombre ${nombre} se encuentra ${contador} veces en el array.`)
+    } else if (contador === 1) {
+        console.log(`El nombre ${nombre} se encuentra una vez en el array.`)
+    } else {
+        console.log(`El nombre ${nombre} no se encuentra en el array.`)
     }
-    return nombresConM;
 }
-let resultado = filtrarNombresConM(nombres);
-console.log(resultado);
+
+buscarNombreDuplicado(nombre, nombresArray);
