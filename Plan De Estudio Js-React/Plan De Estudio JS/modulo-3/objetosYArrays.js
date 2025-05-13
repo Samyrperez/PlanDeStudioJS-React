@@ -361,14 +361,14 @@ Crea una función llamada clasificarPropiedades(objeto) que:
 4. El valor debe ser el original que tenía en el objeto inicial.
 */
 
-let producto = {
-    nombre: "Laptop",
-    precio: 2500,
-    disponible: true,
-    descripcion: "Alta gama",
-    garantia: false,
-    stock: 15
-};
+// let producto = {
+//     nombre: "Laptop",
+//     precio: 2500,
+//     disponible: true,
+//     descripcion: "Alta gama",
+//     garantia: false,
+//     stock: 15
+// };
 
 function clasificarPropiedades(objeto) {
     let resultado =
@@ -395,4 +395,151 @@ function clasificarPropiedades(objeto) {
 
 }
 
-console.log(clasificarPropiedades(producto));
+// console.log(clasificarPropiedades(producto));
+
+
+
+/*
+🧠 Reto: Inventario de tienda
+Tienes un objeto que representa un producto en una tienda. Debes:
+
+1. Crear una función dentro del objeto llamada mostrarResumen() que imprima algo como:
+"Producto: Televisor - Precio: $1200 - En stock: 4 unidades"
+
+2. Agregar dinámicamente una nueva propiedad al producto: oferta (true o false).
+
+3. Agregar un método aplicarOferta() que reduzca el precio en un 20% si oferta es true.
+
+4. Validar si una propiedad existe dentro del objeto antes de mostrarla.
+
+🧪 Pista:
+. Usa this.propiedad dentro de los métodos.
+
+. Usa hasOwnProperty() para validar.
+
+. Usa this.precio *= 0.8 para aplicar descuento del 20%.
+*/
+
+
+// 1. Crear una función dentro del objeto llamada mostrarResumen() que imprima algo como:
+// "Producto: Televisor - Precio: $1200 - En stock: 4 unidades"
+/*
+let producto = {
+    id: "TV12345",
+    nombre: "Smart TV Samsung 55 pulgadas",
+    marca: "Samsung",
+    modelo: "UN55AU8000FXZA",
+    categoria: "Televisores",
+    descripcion: "Televisor Smart TV 4K UHD de 55 pulgadas con HDR y conexión Wi-Fi.",
+    precio: 459.99,
+    stock: 25, 
+    oferta: true,
+    descuento: function() {
+        if(this.hasOwnProperty("oferta") && this.oferta === true) {
+            this.precio *= 0.80;
+            console.log("Oferta aplicada. Nuevo precio: $", this.precio.toFixed(2))
+        } else {
+            console.log("No hay oferta displonible.")
+        }
+    },  
+    mostrarResumen: function (){
+        console.log(`Producto: Nombre: ${this.nombre} - Precio: $${this.precio} - En stock: ${this.stock}`);
+    }
+}
+*/
+// 2. Agregar dinámicamente una nueva propiedad al producto: oferta (true o false).
+// producto.oferta = true;
+// console.log(producto)
+// producto.descuento();
+// console.log(producto);
+// producto.mostrarResumen();
+
+// let descuento = oferta = true ? this.precio *= 0.8 : this.precio;
+
+// producto[descuento] = true;
+
+// producto.mostrarResumen();
+
+/*
+
+🧩 Mejoras sugeridas:
+| Mejora                                                         | Objetivo                               |
+| -------------------------------------------------------------- | -------------------------------------- |
+| 🧠 Agregar un historial de precios                             | Saber cuánto costó antes del descuento |
+| 🔁 Controlar que el descuento no se aplique múltiples veces    |                                        |
+| 📦 Método para actualizar el stock al realizar una venta       |                                        |
+| ❗ Validación para evitar ventas sin stock disponible           |                                        |
+| 📝 Método para mostrar todos los detalles (tipo ficha técnica) |                                        |
+
+
+*/
+let producto = {
+    id: "TV12345",
+    nombre: "Smart TV Samsung 55 pulgadas",
+    marca: "Samsung",
+    modelo: "UN55AU8000FXZA",
+    categoria: "Televisores",
+    descripcion: "Televisor Smart TV 4K UHD de 55 pulgadas con HDR y conexión Wi-Fi.",
+    precio: 459.99,
+    precioOriginal: 459.99, // Guardamos el precio base
+    historialPrecios: [],
+    stock: 25,
+    oferta: true,
+    precioDescontado: false, // Control de descuento
+
+    // Método para aplicar descuento
+    aplicarDescuento: function () {
+        if (this.oferta && !this.precioDescontado) {
+            this.historialPrecios.push(this.precio); // Guardamos el precio actual
+            this.precio *= 0.8;
+            this.precioDescontado = true;
+            console.log(`✅ Descuento aplicado. Nuevo precio: $${this.precio.toFixed(2)}`);
+        } else if (this.precioDescontado) {
+            console.log("⚠️ El descuento ya fue aplicado.");
+        } else {
+            console.log("❌ No hay oferta disponible.");
+        }
+    },
+
+    // Método para mostrar resumen
+    mostrarResumen: function () {
+        console.log(`📺 Producto: ${this.nombre}\n💵 Precio actual: $${this.precio.toFixed(2)}\n📦 Stock: ${this.stock} unidades`);
+    },
+
+    // Método para mostrar ficha técnica completa
+    mostrarFichaTecnica: function () {
+        console.log("🔧 Ficha técnica completa:");
+        for (let clave in this) {
+            if (typeof this[clave] !== "function") {
+                console.log(`- ${clave}: ${this[clave]}`);
+            }
+        }
+    },
+
+    // Método para vender producto
+    vender: function (cantidad) {
+        if (this.stock >= cantidad) {
+            this.stock -= cantidad;
+            console.log(`✅ Venta realizada: ${cantidad} unidad(es). Stock restante: ${this.stock}`);
+        } else {
+            console.log("❌ No hay suficiente stock para realizar esta venta.");
+        }
+    }
+};
+
+producto.mostrarResumen();
+producto.aplicarDescuento();
+producto.vender(3);
+producto.vender(30); // Prueba con más de lo disponible
+producto.mostrarFichaTecnica();
+
+// 🧠 ¿Dónde los vemos en la vida real?
+/*
+| Caso real          | Objeto   | Métodos comunes                                                           |
+| ------------------ | -------- | ------------------------------------------------------------------------- |
+| Tienda online      | Producto | `aplicarDescuento()`, `vender()`, `actualizarStock()`, `mostrarResumen()` |
+| Usuario en una app | Usuario  | `iniciarSesion()`, `actualizarPerfil()`, `cerrarSesion()`                 |
+| Juego              | Jugador  | `mover()`, `atacar()`, `recogerItem()`, `subirNivel()`                    |
+| Carrito de compras | Carrito  | `agregarProducto()`, `quitarProducto()`, `calcularTotal()`                |
+
+*/

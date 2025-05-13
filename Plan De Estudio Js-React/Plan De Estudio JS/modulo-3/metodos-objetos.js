@@ -27,13 +27,3 @@ persona2.saludar(); // Hola, soy undefined
 // Por eso, siempre usa function() tradicional para métodos si vas a usar this.
 
 
-let televisor = {
-    id: "TV12345",               // Identificador único
-    nombre: "Smart TV Samsung 55 pulgadas",
-    marca: "Samsung",
-    modelo: "UN55AU8000FXZA",
-    categoria: "Televisores",
-    descripcion: "Televisor Smart TV 4K UHD de 55 pulgadas con HDR y conexión Wi-Fi.",
-    precio: 459.99,
-    stock: 25,  
-}
